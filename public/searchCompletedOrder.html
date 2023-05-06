@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Search User Completed Order</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <form method="get" action="/product">
+      <h2>Seach User Completed Order</h2>
+      <label for="id">User ID:</label><br />
+      <input type="text" id="id" name="id" /><br />
+      <input class="btn" type="submit" value="GET" />
+    </form>
+
+    <script>
+      const form = document.querySelector('form');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const id = form.id.value;
+        form.action = '/orders/completed/' + id;
+        form.submit();
+      });
+    </script>
+  </body>
+</html>

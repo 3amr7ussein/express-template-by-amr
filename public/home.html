@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
+
+    <title>Store Front</title>
+  </head>
+  <body>
+    <nav>
+      <h1></h1>
+      <ul>
+        <li id="welcome">Welcome,</li>
+        <li id="login"><a href="/signin">login</a></li>
+        <li><a href="/signup" class="btn">Sign up</a></li>
+        <li id="logout"><a href="/signout">logout</a></li>
+      </ul>
+    </nav>
+
+    <header>
+      <div class="headings">
+        <h2>Store Front</h2>
+        <h3>By Amr Hussein</h3>
+        <a href="/users" target="_blank" class="btn">View Users</a>
+        <a href="/users/current-user" target="_blank" class="btn">View Current User</a>
+        <a href="/users/search" target="_blank" class="btn">Search Users</a>
+        <br />
+        <a href="/products" target="_blank" class="btn">View Products</a>
+        <a href="/products/top" target="_blank" class="btn">TOP 5</a>
+        <a href="/products/search" target="_blank" class="btn">Search Products By ID</a>
+        <a href="/products/category" target="_blank" class="btn">Search Products By Category</a>
+        <a href="/products/create" target="_blank" class="btn">Add Product</a>
+        <br />
+        <a href="/orders" target="_blank" class="btn">View Orders</a>
+        <a href="/orders/create" target="_blank" class="btn">Add Order</a>
+        <a href="/orders/addItem" target="_blank" class="btn">Fill Order</a>
+        <a href="/orders/current" target="_blank" class="btn">Current Order By User</a>
+        <a href="/orders/completed" target="_blank" class="btn">Completed Orders</a>
+      </div>
+    </header>
+
+    <script>
+      const welcome = document.querySelector('#welcome');
+      window.addEventListener('load', async () => {
+        // reset errors
+        // get values
+        try {
+          const res = await fetch('/users/current-user', {
+            method: 'GET',
+          });
+          const data = await res.json();
+          // welcome.textContent = 'welcome ' + data.firstname;
+          const login = document.getElementById('login');
+          login.remove();
+          const tag = document.createElement('strong');
+          tag.className = 'username';
+          const name = document.createTextNode(data.firstname + ' ' + data.lastname);
+          tag.appendChild(name);
+          welcome.appendChild(tag);
+        } catch (err) {
+          const logout = document.getElementById('logout');
+          logout.remove();
+        }
+      });
+    </script>
+  </body>
+</html>
